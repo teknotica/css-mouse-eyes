@@ -1,25 +1,20 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { useLocation } from "react-router-dom";
 
-import styles from "./styles.js";
+import styles from "./styles";
 
-const Column = ({ count }) => (
-  <div className="column">
-    {[...Array(count)].map((_, b) => (
-      <div key={b} css={styles.bubble}>
-        <div css={styles.iris} />
-      </div>
-    ))}
-  </div>
-);
+const backgroundMap = {
+  "/": "#3987b1",
+  "/eye-balls": "#ffdbdb",
+};
 
-const Container = ({ widthCount, heightCount }) => (
-  <div css={styles.base}>
-    {[...Array(widthCount)].map((_, b) => (
-      <Column key={b} count={heightCount} />
-    ))}
-  </div>
-);
+const Container = ({ children }) => {
+  const location = useLocation();
+  const background = backgroundMap[location.pathname];
+
+  return <div css={styles.container(background)}>{children}</div>;
+};
 
 export default Container;

@@ -1,15 +1,26 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Container from "./components/container";
-import useMouseOver from "./hooks/useMouseOver";
+import BubbleWrap from "./components/BubbleWrap";
+import Container from "./components/Container";
+import EyeBalls from "./components/EyeBalls";
+import Navigation from "./components/Navigation";
 
 const App = () => {
-  useMouseOver();
-
   return (
-    <div className="App">
-      <Container widthCount={15} heightCount={15} />
-    </div>
+    <Router>
+      <Container>
+        <Navigation />
+        <Switch>
+          <Route exact path="/">
+            <BubbleWrap horizontalCount={15} verticalCount={15} />
+          </Route>
+          <Route path="/eye-balls">
+            <EyeBalls horizontalCount={15} verticalCount={15} />
+          </Route>
+        </Switch>
+      </Container>
+    </Router>
   );
 };
 

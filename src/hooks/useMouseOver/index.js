@@ -19,7 +19,7 @@ const useMouseOver = () => {
             addClassToBubble(event, item)
           );
         } else if (action === REMOVE_EVENTLISTENER) {
-          item.addEventListener("mouseover", (event) =>
+          item.removeEventListener("mouseover", (event) =>
             addClassToBubble(event, item)
           );
         }

@@ -10,11 +10,11 @@ const backgroundMap = {
   "/eye-balls": "#ffdbdb",
 };
 
-const Container = ({ children }) => {
+const Wrapper = ({ children }) => {
   const location = useLocation();
   const background = backgroundMap[location.pathname];
 
   return <div css={styles.container(background)}>{children}</div>;
 };
 
-export default Container;
+export default Wrapper;

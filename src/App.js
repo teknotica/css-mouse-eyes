@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import BubbleWrap from "./components/BubbleWrap";
-import Container from "./components/Container";
 import EyeBalls from "./components/EyeBalls";
 import Navigation from "./components/Navigation";
+import Wrapper from "./components/Wrapper";
 
 const App = () => {
   return (
     <Router>
-      <Container>
+      <Wrapper>
         <Navigation />
         <Switch>
           <Route exact path="/">
@@ -19,7 +19,7 @@ const App = () => {
             <EyeBalls horizontalCount={15} verticalCount={15} />
           </Route>
         </Switch>
-      </Container>
+      </Wrapper>
     </Router>
   );
 };

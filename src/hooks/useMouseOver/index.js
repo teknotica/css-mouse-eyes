@@ -5,7 +5,10 @@ const REMOVE_EVENTLISTENER = "REMOVE";
 
 const useMouseOver = () => {
   const addClassToBubble = (event, item) => {
-    item.classList.add(...["popped"]);
+    if (!item.classList.contains("popped")) {
+      item.classList.add(...["popped"]);
+      item.nextSibling.play();
+    }
   };
 
   const handleEventListeners = useCallback((action) => {

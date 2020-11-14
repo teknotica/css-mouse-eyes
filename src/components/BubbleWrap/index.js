@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { Fragment } from "react";
 
 import useMouseOver from "../../hooks/useMouseOver";
 import styles from "./styles.js";
@@ -8,7 +9,14 @@ import styles from "./styles.js";
 const Column = ({ count }) => (
   <div className="column">
     {[...Array(count)].map((_, b) => (
-      <div key={b} css={styles.bubble} />
+      <Fragment key={b}>
+        <div css={styles.bubble} />
+        <audio
+          src={`${process.env.PUBLIC_URL}pop2.ogg`}
+          preload="auto"
+          autoPlay={false}
+        ></audio>
+      </Fragment>
     ))}
   </div>
 );
@@ -21,7 +29,6 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
       {[...Array(horizontalCount)].map((_, b) => (
         <Column key={b} count={verticalCount} />
       ))}
-      <audio id="popAudio" src={`${process.env.PUBLIC_URL}pop.wav`}></audio>
     </div>
   );
 };

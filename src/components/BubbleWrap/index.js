@@ -28,10 +28,12 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
   const [background, setBackground] = useState(colours[colourIndex]);
 
   const getNewBackground = () => {
-    const newIndex = getColourIndex(colourIndex, colours.length);
+    const newIndex = getColourIndex(colours.length);
 
-    setColourIndex(newIndex);
-    setBackground(colours[newIndex]);
+    if (newIndex) {
+      setColourIndex(newIndex);
+      setBackground(colours[newIndex]);
+    }
   };
 
   useMouseOver();
@@ -44,7 +46,7 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
             <span role="img" aria-label="rainbow">
               🌈{" "}
             </span>
-            Change colour
+            [Change colour]
           </button>
           {/* <div>
             <input

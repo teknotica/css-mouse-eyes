@@ -30,18 +30,3 @@ export const colours = [
     linearGradientPopped: ["#d8bf40", "#ffe34c"],
   },
 ];
-
-const getFirstColour = () => colours[0];
-
-const getRandomColour = () => {
-  return colours[Math.floor(Math.random() * colours.length)];
-};
-
-const useBackgroundColour = () => {
-  return {
-    getFirstColour,
-    getRandomColour,
-  };
-};
-
-export default useBackgroundColour;

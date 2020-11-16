@@ -43,12 +43,10 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
   };
 
   const getNewBackground = () => {
-    const newIndex = getColourIndex(colours.length);
+    const newIndex = getColourIndex(colourIndex);
 
-    if (newIndex) {
-      setColourIndex(newIndex);
-      setBackground(colours[newIndex]);
-    }
+    setColourIndex(newIndex);
+    setBackground(colours[newIndex]);
   };
 
   useMouseOver();

@@ -8,7 +8,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <BubbleWrap horizontalCount={15} verticalCount={15} />
+          <BubbleWrap horizontalCount={10} verticalCount={10} />
         </Route>
       </Switch>
     </Router>

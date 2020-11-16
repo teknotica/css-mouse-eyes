@@ -23,8 +23,8 @@ const styles = {
         ${linearGradient[0]},
         ${linearGradient[1]}
       );
-      width: 40px;
-      height: 40px;
+      width: 2rem;
+      height: 2rem;
       margin-right: 5px;
       margin-bottom: 5px;
       cursor: pointer;

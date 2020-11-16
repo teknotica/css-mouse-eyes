@@ -1,15 +1,27 @@
 import { useCallback, useEffect } from "react";
 
-const ADD_EVENTLISTENER = "ADD";
-const REMOVE_EVENTLISTENER = "REMOVE";
+import {
+  ADD_EVENTLISTENER,
+  REMOVE_EVENTLISTENER,
+  SOUND_ON,
+} from "../../constants";
+import useLocalStorage from "../useLocalStorage";
 
 const useMouseOver = () => {
-  const addClassToBubble = useCallback((event, item) => {
-    if (!item.classList.contains("popped")) {
-      item.classList.add(...["popped"]);
-      item.nextSibling.play();
-    }
-  }, []);
+  const { getLocalItem } = useLocalStorage();
+
+  const addClassToBubble = useCallback(
+    (event, item) => {
+      if (!item.classList.contains("popped")) {
+        item.classList.add(...["popped"]);
+
+        if (getLocalItem("sound") === SOUND_ON) {
+          item.nextSibling.play();
+        }
+      }
+    },
+    [getLocalItem]
+  );
 
   const handleEventListeners = useCallback(
     (action) => {

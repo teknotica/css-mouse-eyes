@@ -1,12 +1,16 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
+import { SOUND_OFF, SOUND_ON } from "../../constants";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import useMouseOver from "../../hooks/useMouseOver";
 import { colours } from "../../theme";
 import getColourIndex from "../../utils/getColourIndex";
 import styles from "./styles.js";
+
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 const Column = ({ count }) => (
   <div className="column">
@@ -14,7 +18,7 @@ const Column = ({ count }) => (
       <Fragment key={b}>
         <div className="bubble" />
         <audio
-          src={`${process.env.PUBLIC_URL}pop2.ogg`}
+          src={`${process.env.PUBLIC_URL}pop.wav`}
           preload="auto"
           autoPlay={false}
         ></audio>
@@ -26,6 +30,17 @@ const Column = ({ count }) => (
 const BubbleWrap = ({ horizontalCount, verticalCount }) => {
   const [colourIndex, setColourIndex] = useState(0);
   const [background, setBackground] = useState(colours[colourIndex]);
+  const { setLocalItem, getLocalItem } = useLocalStorage();
+
+  useEffect(() => {
+    setLocalItem("sound", SOUND_OFF);
+  }, [setLocalItem]);
+
+  const toggleSound = () => {
+    const soundSetting =
+      getLocalItem("sound") === SOUND_OFF ? SOUND_ON : SOUND_OFF;
+    setLocalItem("sound", soundSetting);
+  };
 
   const getNewBackground = () => {
     const newIndex = getColourIndex(colours.length);
@@ -48,15 +63,17 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
             </span>
             [Change colour]
           </button>
-          {/* <div>
-            <input
-              type="checkbox"
-              id="sound"
-              name="sound"
-              onClick={() => console.log("Toogle")}
-            />
-            <label htmlFor="sound">Toggle sound</label>
-          </div> */}
+          {!isSafari && (
+            <div>
+              <input
+                type="checkbox"
+                id="sound"
+                name="sound"
+                onClick={toggleSound}
+              />
+              <label htmlFor="sound">Sound ON/OFF</label>
+            </div>
+          )}
         </div>
         {[...Array(horizontalCount)].map((_, b) => (
           <Column key={b} count={verticalCount} />

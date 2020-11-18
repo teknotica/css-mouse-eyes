@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 
 import { SOUND_OFF, SOUND_ON } from "../../constants";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import useMouseOver from "../../hooks/useMouseOver";
+import { resetBubbles, useMouseOver } from "../../hooks/useMouseOver";
 import { colours } from "../../theme";
 import getColourIndex from "../../utils/getColourIndex";
 import styles from "./styles.js";
@@ -36,10 +36,12 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
     setLocalItem("sound", SOUND_OFF);
   }, [setLocalItem]);
 
-  const toggleSound = () => {
-    const soundSetting =
-      getLocalItem("sound") === SOUND_OFF ? SOUND_ON : SOUND_OFF;
-    setLocalItem("sound", soundSetting);
+  const toggleSound = (event) => {
+    const currentSoundMode = getLocalItem("sound");
+    setLocalItem(
+      "sound",
+      currentSoundMode === SOUND_OFF ? SOUND_ON : SOUND_OFF
+    );
   };
 
   const getNewBackground = () => {
@@ -61,15 +63,21 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
             </span>
             [Change colour]
           </button>
+          <button onClick={() => resetBubbles()}>
+            <span role="img" aria-label="reset">
+              ♻️{" "}
+            </span>
+            [Reset bubbles]
+          </button>
           {!isSafari && (
             <div>
               <input
                 type="checkbox"
-                id="sound"
                 name="sound"
-                onClick={toggleSound}
+                id="sound"
+                onChange={() => toggleSound()}
               />
-              <label htmlFor="sound">Sound ON/OFF</label>
+              <label htmlFor="sound">Sound ON</label>
             </div>
           )}
         </div>

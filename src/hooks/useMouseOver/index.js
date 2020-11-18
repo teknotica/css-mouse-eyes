@@ -54,4 +54,15 @@ const useMouseOver = () => {
   }, [handleEventListeners]);
 };
 
-export default useMouseOver;
+const resetBubbles = () => {
+  const columns = document.getElementsByClassName("column");
+
+  for (let column of columns) {
+    const items = column.getElementsByTagName("div");
+    for (let item of items) {
+      item.classList.remove("popped");
+    }
+  }
+};
+
+export { useMouseOver, resetBubbles };

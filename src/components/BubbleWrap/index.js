@@ -57,29 +57,37 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
     <div css={styles.wrapper(background)}>
       <div css={styles.base}>
         <div css={styles.controls}>
-          <button onClick={() => getNewBackground()}>
-            <span role="img" aria-label="rainbow">
-              🌈{" "}
-            </span>
-            [Change colour]
-          </button>
-          <button onClick={() => resetBubbles()}>
-            <span role="img" aria-label="reset">
-              ♻️{" "}
-            </span>
-            [Reset bubbles]
-          </button>
-          {!isSafari && (
-            <div>
-              <input
-                type="checkbox"
-                name="sound"
-                id="sound"
-                onChange={() => toggleSound()}
-              />
-              <label htmlFor="sound">Sound ON</label>
-            </div>
-          )}
+          <ul css={styles.controlList}>
+            <li>
+              <button onClick={() => getNewBackground()}>
+                <span role="img" aria-label="rainbow">
+                  🌈{" "}
+                </span>
+                Change colour
+              </button>
+            </li>
+            <li>
+              <button onClick={() => resetBubbles()}>
+                <span role="img" aria-label="reset">
+                  ♻️{" "}
+                </span>
+                Reset bubbles
+              </button>
+            </li>
+            {!isSafari && (
+              <li>
+                <span css={styles.inputWrapper}>
+                  <input
+                    type="checkbox"
+                    name="sound"
+                    id="sound"
+                    onChange={() => toggleSound()}
+                  />
+                  <label htmlFor="sound">Sound ON</label>
+                </span>
+              </li>
+            )}
+          </ul>
         </div>
         {[...Array(horizontalCount)].map((_, b) => (
           <Column key={b} count={verticalCount} />

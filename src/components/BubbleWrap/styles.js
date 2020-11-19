@@ -43,8 +43,37 @@ const styles = {
   `,
   controls: css`
     position: absolute;
-    top: 5px;
-    right: 5px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+  `,
+  controlList: css`
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline;
+      margin-right: 5px;
+    }
+  `,
+  inputWrapper: css`
+    padding: 7px 10px;
+    background: #dddbda;
+    border-radius: 80px;
+    transition: background-color 0.5s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: #9e9e9e;
+    }
+
+    label {
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
   `,
 };
 

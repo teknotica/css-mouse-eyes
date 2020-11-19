@@ -1,5 +1,11 @@
 export const colours = [
   {
+    background: "#f0d447",
+    boxShadow: ["#ccb43c", "#fff452"],
+    linearGradient: ["#ffe34c", "#d8bf40"],
+    linearGradientPopped: ["#d8bf40", "#ffe34c"],
+  },
+  {
     background: "#3987b1",
     boxShadow: ["#307396", "#429bcc"],
     linearGradient: ["#3d90bd", "#337a9f"],
@@ -22,11 +28,5 @@ export const colours = [
     boxShadow: ["#96308e", "#cc42c0"],
     linearGradient: ["#bd3db3", "#9f3396"],
     linearGradientPopped: ["#9f3396", "#bd3db3"],
-  },
-  {
-    background: "#f0d447",
-    boxShadow: ["#ccb43c", "#fff452"],
-    linearGradient: ["#ffe34c", "#d8bf40"],
-    linearGradientPopped: ["#d8bf40", "#ffe34c"],
   },
 ];

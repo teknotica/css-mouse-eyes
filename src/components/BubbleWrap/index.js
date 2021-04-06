@@ -1,16 +1,14 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
-import { SOUND_OFF, SOUND_ON } from "../../constants";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { resetBubbles, useMouseOver } from "../../hooks/useMouseOver";
+import { useMouseOver } from "../../hooks/useMouseOver";
 import { colours } from "../../theme";
 import getColourIndex from "../../utils/getColourIndex";
+import Controls from "../Controls";
+import CreditFooter from "../CreditFooter";
 import styles from "./styles.js";
-
-var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 const Column = ({ count }) => (
   <div className="column">
@@ -30,20 +28,8 @@ const Column = ({ count }) => (
 const BubbleWrap = ({ horizontalCount, verticalCount }) => {
   const [colourIndex, setColourIndex] = useState(0);
   const [background, setBackground] = useState(colours[colourIndex]);
-  const { setLocalItem, getLocalItem } = useLocalStorage();
 
-  useEffect(() => {
-    setLocalItem("sound", SOUND_OFF);
-  }, [setLocalItem]);
-
-  const toggleSound = (event) => {
-    const currentSoundMode = getLocalItem("sound");
-    setLocalItem(
-      "sound",
-      currentSoundMode === SOUND_OFF ? SOUND_ON : SOUND_OFF
-    );
-  };
-
+  // Gets a new background index
   const getNewBackground = () => {
     const newIndex = getColourIndex(colourIndex);
 
@@ -55,44 +41,13 @@ const BubbleWrap = ({ horizontalCount, verticalCount }) => {
 
   return (
     <div css={styles.wrapper(background)}>
+      <Controls getNewBackground={getNewBackground} />
       <div css={styles.base}>
-        <div css={styles.controls}>
-          <ul css={styles.controlList}>
-            <li>
-              <button onClick={() => getNewBackground()}>
-                <span role="img" aria-label="rainbow">
-                  🌈{" "}
-                </span>
-                Change colour
-              </button>
-            </li>
-            <li>
-              <button onClick={() => resetBubbles()}>
-                <span role="img" aria-label="reset">
-                  ♻️{" "}
-                </span>
-                Reset bubbles
-              </button>
-            </li>
-            {!isSafari && (
-              <li>
-                <span css={styles.inputWrapper}>
-                  <input
-                    type="checkbox"
-                    name="sound"
-                    id="sound"
-                    onChange={() => toggleSound()}
-                  />
-                  <label htmlFor="sound">Sound ON</label>
-                </span>
-              </li>
-            )}
-          </ul>
-        </div>
         {[...Array(horizontalCount)].map((_, b) => (
           <Column key={b} count={verticalCount} />
         ))}
       </div>
+      <CreditFooter />
     </div>
   );
 };

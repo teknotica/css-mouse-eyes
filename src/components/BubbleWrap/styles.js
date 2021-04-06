@@ -12,6 +12,7 @@ const styles = {
     justify-content: center;
     height: 100%;
     background: ${background};
+    position: relative;
 
     .bubble {
       border-radius: 50%;
